@@ -55,7 +55,80 @@ const ListItems = () => {
     );
   }
 
-  return (
+//   return (
+//     <>
+//       <AdminNavbar />
+//       <div className={styles.pageWrapper}>
+//         <div className="max-w-7xl mx-auto">
+//           <div className={styles.cardContainer}>
+//             <h2 className={styles.title}>Manage Menu Items</h2>
+
+//             <div className={styles.tableWrapper}>
+//               <table className={styles.table}>
+//                 <thead className={styles.thead}>
+//                   <tr>
+//                     <th className={styles.th}>Image</th>
+//                     <th className={styles.th}>Name</th>
+//                     <th className={styles.th}>Category</th>
+//                     <th className={styles.th}>Price (₹)</th>
+//                     <th className={styles.th}>Rating</th>
+//                     <th className={styles.th}>Hearts</th>
+//                     <th className={styles.thCenter}>Delete</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {items.map(item => (
+//                     <tr key={item._id} className={styles.tr}>
+//                       <td className={styles.imgCell}>
+//                         <img
+//                           src={item.imageUrl}
+//                           alt={item.name}
+//                           className={styles.img}
+//                         />
+//                       </td>
+//                       <td className={styles.nameCell}>
+//                         <div className="space-y-1">
+//                           <p className={styles.nameText}>{item.name}</p>
+//                           <p className={styles.descText}>{item.description}</p>
+//                         </div>
+//                       </td>
+//                       <td className={styles.categoryCell}>{item.category}</td>
+//                       <td className={styles.priceCell}>₹{item.price}</td>
+//                       <td className={styles.ratingCell}>
+//                         <div className="flex gap-1">{renderStars(item.rating)}</div>
+//                       </td>
+//                       <td className={styles.heartsCell}>
+//                         <div className={styles.heartsWrapper}>
+//                           <FiHeart className="text-xl" />
+//                           <span>{item.hearts}</span>
+//                         </div>
+//                       </td>
+//                       <td className="p-4 text-center">
+//                         <button onClick={() => handleDelete(item._id)} className={styles.deleteBtn}>
+//                           <FiTrash2 className="text-2xl" />
+//                         </button>
+//                       </td>
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//             </div>
+
+//             {items.length === 0 && (
+//               <div className={styles.emptyState}>
+//                 No items found in the menu
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default ListItems;
+
+ return (
     <>
       <AdminNavbar />
       <div className={styles.pageWrapper}>
@@ -71,8 +144,9 @@ const ListItems = () => {
                     <th className={styles.th}>Name</th>
                     <th className={styles.th}>Category</th>
                     <th className={styles.th}>Price (₹)</th>
-                    <th className={styles.th}>Rating</th>
+                    {/* <th className={styles.th}>Rating</th> */}
                     <th className={styles.th}>Hearts</th>
+                    <th className={styles.th}>Nutrition</th> {/* New Nutrition Column */}
                     <th className={styles.thCenter}>Delete</th>
                   </tr>
                 </thead>
@@ -97,12 +171,28 @@ const ListItems = () => {
                       <td className={styles.ratingCell}>
                         <div className="flex gap-1">{renderStars(item.rating)}</div>
                       </td>
-                      <td className={styles.heartsCell}>
+                      {/* <td className={styles.heartsCell}>
                         <div className={styles.heartsWrapper}>
                           <FiHeart className="text-xl" />
                           <span>{item.hearts}</span>
                         </div>
-                      </td>
+                      </td> */}
+
+                      {/* Nutrition Info Column */}
+                      <td className={styles.nutritionCell}>
+  {item.calories || item.protein || item.carbs || item.fat ? (
+    <div className="text-sm text-amber-300 space-y-0.5">
+      <div>Calories: {item.calories ?? 'N/A'} kcal</div>
+      <div>Protein: {item.protein ?? 'N/A'} g</div>
+      <div>Carbs: {item.carbs ?? 'N/A'} g</div>
+      <div>Fat: {item.fat ?? 'N/A'} g</div>
+    </div>
+  ) : (
+    <span className="text-gray-400">N/A</span>
+  )}
+</td>
+
+
                       <td className="p-4 text-center">
                         <button onClick={() => handleDelete(item._id)} className={styles.deleteBtn}>
                           <FiTrash2 className="text-2xl" />
